@@ -18,15 +18,15 @@ class ProfileScreen extends StatelessWidget {
         TextEditingController(text: cubit.gender ?? "");
     TextEditingController ageController = TextEditingController(
         text: "${cubit.calculateAge(cubit.timestampToDateTime(cubit.date??Timestamp.fromMicrosecondsSinceEpoch(100000)))} Years");
-    return Scaffold(
+    return Scaffold(appBar: AppBar(),
       body: SafeArea(
         child: Center(
           child: Column(
             children: [
               CircleAvatar(
                 radius: 64.w,
-                backgroundImage: NetworkImage(
-                    "${cubit.user?.photoURL ?? "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"}"),
+                backgroundImage: NetworkImage(cubit.profileImage==""?"https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg":
+                    "${cubit.profileImage ?? "https://static.vecteezy.com/system/resources/previews/009/292/244/original/default-avatar-icon-of-social-media-user-vector.jpg"}"),
               ),
               Text(cubit.userName?? cubit.user!.displayName!,
                   style:

@@ -3,6 +3,7 @@ import 'package:bonevision/component/custom_button.dart';
 import 'package:bonevision/component/custom_form_text_field.dart';
 import 'package:bonevision/component/triangle.dart';
 import 'package:bonevision/screens/login_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,11 +38,21 @@ class ChangePasswordScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ClipPath(
-                    child: Container(
-                      color: Color(0xff86E3EF),
-                      width: 360.w, height: 200.h,
-                    ), clipper: Triangle(),
+                  Stack(
+                    children: [
+                      ClipPath(
+                        child: Container(
+                          color: Color(0xff86E3EF),
+                          width: 360.w, height: 200.h,
+                        ), clipper: Triangle(),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 32.0,horizontal: 12),
+                        child: IconButton.outlined(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back)),
+                      ),
+                    ],
                   ),
                   Container(width: 0.9.sw, height: 300.h,
                     child: Column(

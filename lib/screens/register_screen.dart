@@ -11,7 +11,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key,this.user});
+  RegisterScreen({super.key, this.user});
+
   User? user;
 
   @override
@@ -38,26 +39,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _isPasswordObscured = !_isPasswordObscured;
     });
   }
-@override
+
+  @override
   void initState() {
-    if(LoginCubit.get(context).isExist==false){
-      emailController.text=widget.user?.email?? "";
-      usernameController.text=widget.user?.displayName??"";
+    RegisterCubit.get(context).image=null;
+    if (LoginCubit.get(context).isExist == false) {
+      emailController.text = widget.user?.email ?? "";
+      usernameController.text = widget.user?.displayName ?? "";
     }
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     var cubit = RegisterCubit.get(context);
 
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
-        if (state is RegisterSuccessState) {
+        if (state is RegisterUserSuccess) {
           cubit.showSnackBar(context, "Account Created Successfully");
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const LoginScreen()));
-        } else if (state is RegisterErrorState) {
-          cubit.showSnackBar(context, state.error.toString());
+        } else if (state is RegisterUserError) {
+          cubit.showSnackBar(context, cubit.error.toString());
         }
       },
       builder: (context, state) {
@@ -68,31 +72,65 @@ class _RegisterScreenState extends State<RegisterScreen> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(width: 1.sw, height: 180.h,
-                  child: Image.asset("assets/images/3.png"),),
-                  Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Bone',
-                            style: GoogleFonts.prompt(
-                                color: Color(0xff97dfe3),
-                                fontWeight: FontWeight.w700,
-                                fontSize: 35.w),
-                          ),
-                          TextSpan(
-                            text: 'Vision',
-                            style: GoogleFonts.prompt(
-                                color: Color(0xffa9a9a9),
-                                fontWeight: FontWeight.w700,
-                                fontSize: 35.w),
-                          ),
-                        ],
+              Stack(
+              children: [
+              Container(
+              height: 250.h,
+                width: 1.sw,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: 12.w,right: 12.w),
+                  child: Column(
+                    children: [
+                      Text(
+                        "Create Account",
+                        style: GoogleFonts.prompt(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff232425)),
                       ),
-                    ),
+                      Text(
+                        "Add Profile Picture",
+                        style: GoogleFonts.prompt(
+                            fontSize: 18.sp, color: Color(0xff232425)),
+                      ),
+                      Stack(children: [
+                        Center(
+                            child: Container(
+                              child: cubit.image != null
+                                  ? CircleAvatar(
+                                radius: 80.r,
+                                backgroundImage:
+                                MemoryImage(cubit.image!),
+                              )
+                                  : CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                radius: 80.r,
+                                child: Image.network("https://static.thenounproject.com/png/4035892-200.png"),
+                              ),
+                            )),
+                        Positioned(
+                            bottom: 3.h,
+                            left: 205.w,
+                            child: IconButton(
+                                onPressed: () {
+                                  cubit.selectImage().then((image) {
+                                    setState(() {
+                                      _selectedImage = image;
+                                    });
+                                  });
+                                },
+                                icon: const Icon(
+                                  Icons.add_a_photo_outlined,
+                                  color: Colors.black87,
+                                )))
+                      ]),
+                    ],
                   ),
+                ),
+              ),
+            ],
+            ),
                   Container(
                     width: 0.8.sw,
                     margin: EdgeInsets.only(bottom: 15.h),
@@ -101,7 +139,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: usernameController,
                       label: "UserName",
                       obscureText: false,
-                      readOnly: LoginCubit.get(context).isExist==false?true:false,
+                      readOnly: LoginCubit.get(context).isExist == false
+                          ? true
+                          : false,
                     ),
                   ),
                   Container(
@@ -112,7 +152,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       controller: emailController,
                       label: "Email",
                       obscureText: false,
-                      readOnly: LoginCubit.get(context).isExist==false?true:false,
+                      readOnly: LoginCubit.get(context).isExist == false
+                          ? true
+                          : false,
                     ),
                   ),
                   Container(
@@ -133,7 +175,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               ? Icons.visibility
                               : Icons.visibility_off)),
                       iconColor:
-                      _isPasswordObscured ? Color(0xff38a7ab) : Colors.grey,
+                          _isPasswordObscured ? Color(0xff38a7ab) : Colors.grey,
                       readOnly: false,
                     ),
                   ),
@@ -141,18 +183,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       width: 0.8.sw,
                       inputDecorationTheme: InputDecorationTheme(
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          constraints:
-                          BoxConstraints(maxHeight: 42.5.h),
+                          constraints: BoxConstraints(maxHeight: 42.5.h),
                           contentPadding:
-                           EdgeInsets.symmetric(horizontal: 10.w),
+                              EdgeInsets.symmetric(horizontal: 10.w),
                           focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                               borderSide:
-                              const BorderSide(color: Colors.black)),
+                                  const BorderSide(color: Colors.black)),
                           enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                               borderSide:
-                              const BorderSide(color: Colors.black))),
+                                  const BorderSide(color: Colors.black))),
                       label: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -170,7 +211,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     width: 0.8.sw,
                     margin: EdgeInsets.only(top: 15.h),
-                    child: CustomTextFormField(controller: dateController,
+                    child: CustomTextFormField(
+                        controller: dateController,
                         icon: IconButton(
                             onPressed: () async {
                               date = await showDatePicker(
@@ -196,16 +238,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         screenWidth: 0.8.sw,
                         screenHeight: 45.h,
                         text: "Register",
-                        onpressed: () {
-                          if (LoginCubit.get(context).isExist==false) {
-                            cubit.saveUser(
-                                emailController.text, passwordController.text, usernameController.text, genderController.text,
-                                date);
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=> LoginScreen()));
-                          }else{
-                            cubit.registerUser(
-                                emailController.text, passwordController.text, usernameController.text, genderController.text,
-                                date);
+                        onpressed: ()async{
+                          if (LoginCubit
+                              .get(context)
+                              .isExist == false) {
+                            if (cubit.image == null) {
+                              cubit.registerUser(emailController.text, passwordController.text);
+                              cubit.saveUser(
+                                  emailController.text,
+                                  passwordController.text,
+                                  usernameController.text,
+                                  genderController.text,
+                                  date, "");
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                            } else if (cubit.image != null) {
+                              cubit.registerUser(emailController.text, passwordController.text);
+                              String imageURL = await cubit.uploadImage(cubit.image!, emailController.text);
+                              cubit.saveUser(
+                                emailController.text,
+                                passwordController.text,
+                                usernameController.text,
+                                genderController.text,
+                                date,imageURL);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginScreen()));
+                            } else {
+                              print("cubit");
+                              cubit.registerUser(
+                                  emailController.text,
+                                  passwordController.text);
+                            }
                           }
                         },
                         bColor: Color(0xff97dfe3),
@@ -225,11 +288,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context,MaterialPageRoute(builder: (context) =>LoginScreen()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
                     },
                     child: Text(
                       "Login",
-                      style: GoogleFonts.prompt(fontWeight:FontWeight.w700,
+                      style: GoogleFonts.prompt(
+                          fontWeight: FontWeight.w700,
                           color: Color(0xff38a7ab),
                           fontSize: 20.w),
                     ),

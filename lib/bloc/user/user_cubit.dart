@@ -19,6 +19,7 @@ class UserCubit extends Cubit<UserState> {
   String? userName;
   String? gender;
   String? password;
+  String? profileImage;
   User? user;
   XFile? file;
   Timestamp? date;
@@ -57,6 +58,7 @@ class UserCubit extends Cubit<UserState> {
         gender=querySnapshot.docs.first.get("gender");
         password=querySnapshot.docs.first.get("password");
         date=querySnapshot.docs.first.get("date");
+        profileImage=querySnapshot.docs.first.get("image");
         emit(ReceiveUserNameSuccessState());
         print("de7k");
         print(date);
@@ -123,13 +125,18 @@ class UserCubit extends Cubit<UserState> {
     }
   }
   Future<String> uploadImage(Uint8List file, email) async {
-    String imgName = email;
-    Reference ref = FirebaseStorage.instance.ref('profile_image').child(
-        imgName);
-    UploadTask uploadTask = ref.putData(file);
-    TaskSnapshot snapshot = await uploadTask;
-    String downloadUrl = await snapshot.ref.getDownloadURL();
-    return downloadUrl;
+    try {
+      String imgName = email;
+      Reference ref = FirebaseStorage.instance.ref('profile_image').child(
+          imgName);
+      UploadTask uploadTask = ref.putData(file);
+      TaskSnapshot snapshot = await uploadTask;
+      String downloadUrl = await snapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } on Exception catch (e) {
+      print(e);
+      return '';
+    }
   }
   updateUserImage(String imageUrl) {
     FirebaseFirestore.instance

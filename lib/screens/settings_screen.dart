@@ -1,4 +1,5 @@
 import 'package:bonevision/screens/change_password_screen.dart';
+import 'package:bonevision/screens/edit_profile.dart';
 import 'package:bonevision/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +34,7 @@ class SettingsScreen extends StatelessWidget {
                 )),
             ElevatedButton(style: ButtonStyle(elevation: MaterialStatePropertyAll(0)),
                 onPressed: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context) => ,));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfile()));
                 },
                 child: Row(
                   children: [
@@ -51,16 +52,6 @@ class SettingsScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.password_outlined,color: Color(0xff2a2a2a),),
                     Text(" Change Password",
-                        style: GoogleFonts.prompt(
-                            fontSize: 16.sp, color: Color(0xff232425))),
-                  ],
-                )),
-            ElevatedButton(style: ButtonStyle(elevation: MaterialStatePropertyAll(0)),
-                onPressed: () {},
-                child: Row(
-                  children: [
-                    Icon(Icons.person_outline,color: Color(0xff2a2a2a),),
-                    Text(" View Profile",
                         style: GoogleFonts.prompt(
                             fontSize: 16.sp, color: Color(0xff232425))),
                   ],
