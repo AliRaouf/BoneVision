@@ -59,12 +59,11 @@ class LoginCubit extends Cubit<LoginState> {
       return null;
     }
   }
-  doesEmailExist(String email) async {
+  Future<bool> doesEmailExist(String email) async {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
     QuerySnapshot querySnapshot = await users.where('email', isEqualTo: email).get();
-    print(querySnapshot.docs.isNotEmpty);
-    isExist=querySnapshot.docs.isNotEmpty;
+    return querySnapshot.docs.isNotEmpty;
 
   }
   Future resetUserPassword(String email)async{

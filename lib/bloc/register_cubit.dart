@@ -32,8 +32,10 @@ class RegisterCubit extends Cubit<RegisterState> {
       } else if (e.code == 'email-already-in-use') {
         error = 'The account already exists for that email.';
         emit(RegisterUserError());
+        print(e);
       }
     } catch (e) {
+      print(e);
       emit(RegisterUserError());
     }
   }

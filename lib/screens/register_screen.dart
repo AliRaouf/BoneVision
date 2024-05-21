@@ -239,9 +239,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         screenHeight: 45.h,
                         text: "Register",
                         onpressed: ()async{
-                          if (LoginCubit
+                          if (await LoginCubit
                               .get(context)
-                              .isExist == false) {
+                              .doesEmailExist(emailController.text) == false) {
                             if (cubit.image == null) {
                               cubit.registerUser(emailController.text, passwordController.text);
                               cubit.saveUser(
