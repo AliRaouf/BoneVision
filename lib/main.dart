@@ -15,7 +15,7 @@ void main() async{
 
   ]);
   runApp(ScreenUtilInit(
-    designSize: Size(360, 690), // Or set a fixed design size
+    designSize: Size(360, 690),
     builder: (context, _) => const AppRoot(),
   ));
 }

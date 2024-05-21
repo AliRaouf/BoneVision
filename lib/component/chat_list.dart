@@ -1,3 +1,4 @@
+import 'package:bonevision/bloc/user/user_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,15 +28,17 @@ class ChatList extends StatelessWidget {
                   BoxDecoration(borderRadius:
                   BorderRadius.only(topLeft:Radius.circular(30),bottomLeft: Radius.circular(30)
                       ,topRight: Radius.circular(30)
-                  ),color: Color(0xff21be44)
+                  ),color: Color(0xff00a228)
                   ):BoxDecoration(borderRadius:
                   BorderRadius.only(topLeft:Radius.circular(30),bottomRight: Radius.circular(30)
                       ,topRight: Radius.circular(30)
-                  ),color: Colors.grey[600]
+                  ),color: Colors.grey[800]
                   ),child: Column(children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0,right: 8,bottom: 8),
-                    child: Text(values.docs[index]["sender"],style: GoogleFonts.prompt(color: Color(0xff232425)),),
+                    child: Text(values.docs[index]["sender"]=="amr2082002@gmail.com"?"Doctor":
+                      values.docs[index]["sender"],style: GoogleFonts.prompt(color: Color(
+                        0xffe7e7e7)),),
                   ),
                   Text(values.docs[index]["text"],style: GoogleFonts.prompt(color: Color(0xfffafafa),fontWeight: FontWeight.bold),)
                 ]),

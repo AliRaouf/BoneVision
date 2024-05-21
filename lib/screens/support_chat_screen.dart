@@ -1,13 +1,14 @@
 import 'package:bonevision/bloc/help_center/helpcenter_cubit.dart';
 import 'package:bonevision/bloc/user/user_cubit.dart';
 import 'package:bonevision/component/chat_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SupportChatScreen extends StatefulWidget {
-  const SupportChatScreen({super.key});
-
+  SupportChatScreen({super.key,this.userEmail});
+  String? userEmail;
   @override
   State<SupportChatScreen> createState() => _SupportChatScreenState();
 }
@@ -15,9 +16,15 @@ class SupportChatScreen extends StatefulWidget {
 class _SupportChatScreenState extends State<SupportChatScreen> {
   @override
   void initState() {
-    HelpcenterCubit.get(context).getUserData();
-    HelpcenterCubit.get(context)
-        .receiveMessage(UserCubit.get(context).user!.email!);
+    if(UserCubit.get(context).type=='doctor'){
+      HelpcenterCubit.get(context)
+          .receiveMessage(widget.userEmail!);
+    }
+    else{
+      HelpcenterCubit.get(context).getUserData();
+      HelpcenterCubit.get(context)
+          .receiveMessage(UserCubit.get(context).user!.email!);
+    }
     super.initState();
   }
   var messageController = TextEditingController();
@@ -45,7 +52,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
           cubit.messagesStream != null // Check if messagesStream is not null
               ? ChatList(
             messageStream: cubit.messagesStream!,
-            userMail: cubit.user!.email!,
+            userMail: FirebaseAuth.instance.currentUser!.email!,
           )
               : CircularProgressIndicator(),
           // Show CircularProgressIndicator if messagesStream is null
@@ -66,13 +73,15 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
                       onPressed: () {
-                        DateTime time = DateTime.now();
-                        cubit.sendMessage(
-                          messageController.text,
-                          time,
-                          cubit.user!.email!,
-                        );
-                        messageController.clear();
+                        if (messageController.text.isNotEmpty) {
+                          DateTime time = DateTime.now();
+                          cubit.sendMessage(
+                            messageController.text,
+                            time,
+                         UserCubit.get(context).type=='doctor'?widget.userEmail!:cubit.user!.email!,
+                          );
+                          messageController.clear();
+                        }
                       },
                       icon: Icon(Icons.send, color: Color(0xff21be44)),
                     ),

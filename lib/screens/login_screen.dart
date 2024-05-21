@@ -50,6 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       builder: (context, state) {
+        if(state is LoginLoadingState){
+          return Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
         return Scaffold(
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0.w),

@@ -1,3 +1,4 @@
+import 'package:bonevision/bloc/doctor/doctor_cubit.dart';
 import 'package:bonevision/bloc/help_center/helpcenter_cubit.dart';
 import 'package:bonevision/bloc/login/login_cubit.dart';
 import 'package:bonevision/bloc/register_cubit.dart';
@@ -16,7 +17,8 @@ class AppRoot extends StatelessWidget {
       BlocProvider(create: (context)=>LoginCubit()),
       BlocProvider(create: (context)=>UserCubit()),
     BlocProvider(create: (context)=>HelpcenterCubit()),
-      BlocProvider(create: (context)=>XrayCubit())
+      BlocProvider(create: (context)=>XrayCubit()),
+      BlocProvider(create: (context)=>DoctorCubit()..receiveMessage())
     ],
       child:
         MaterialApp(debugShowCheckedModeBanner: false,

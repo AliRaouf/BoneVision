@@ -20,6 +20,7 @@ class UserCubit extends Cubit<UserState> {
   String? gender;
   String? password;
   String? profileImage;
+  String? type;
   User? user;
   XFile? file;
   Timestamp? date;
@@ -54,6 +55,7 @@ class UserCubit extends Cubit<UserState> {
           .where("email", isEqualTo: user!.email!)
           .get();
       if (querySnapshot.docs.isNotEmpty) {
+        type = querySnapshot.docs.first.get("type");
         userName = querySnapshot.docs.first.get("username");
         gender=querySnapshot.docs.first.get("gender");
         password=querySnapshot.docs.first.get("password");

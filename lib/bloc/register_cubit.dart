@@ -47,7 +47,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         "password": password,
         "gender": gender,
         "date": date,
-        "image": image
+        "image": image,
+        "type" : 'user'
       });
       print("user saved success");
       emit(SaveUserSuccessState());
