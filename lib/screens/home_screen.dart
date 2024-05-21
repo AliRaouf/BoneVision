@@ -195,78 +195,36 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 20.w, color: Color(0xff232425))),
             ),
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
+              padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 20.h),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: 1.sw,
-                    height: 35.h,
-                    color: Color(0xff87e3f2),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 12.0.w),
-                          child: Text("Upload Image",
-                              style: GoogleFonts.prompt(
-                                  fontSize: 20.w, color: Color(0xff232425))),
-                        )
-                      ],
-                    ),
-                  ),
-                  // cubit.file != null
-                  //     ? Container(
-                  //         margin: EdgeInsets.symmetric(vertical: 20.h),
-                  //         width: 320.w,
-                  //         height: 220.h,
-                  //         child: Image.file(
-                  //           File(cubit.file!.path),
-                  //           fit: BoxFit.fitHeight,
-                  //         ),
-                  //       )
-                  //     : Container(
-                  //         margin: EdgeInsets.symmetric(vertical: 20.h),
-                  //         width: 340.w,
-                  //         height: 220.h,
-                  //         color: Colors.grey[200],
-                  //         child: Column(
-                  //           mainAxisAlignment: MainAxisAlignment.center,
-                  //           children: [
-                  //             Icon(
-                  //               Icons.image_search_rounded,
-                  //               color: Colors.grey[400],
-                  //               size: 150.w,
-                  //             ),
-                  //             Text("UPLOAD IMAGE",
-                  //                 style: TextStyle(
-                  //                     fontSize: 20.w,
-                  //                     color: Colors.grey[400],
-                  //                     fontWeight: FontWeight.w500))
-                  //           ],
-                  //         ),
-                  //       ),
-                  Container(
-                    margin: EdgeInsets.symmetric(vertical: 15),
-                    width: 1.sw,
-                    height: 35.h,
-                    color: Color(0xff87e3f2),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 12.0.w),
-                          child: Text("Last Uploaded",
-                              style: GoogleFonts.prompt(
-                                  fontSize: 20.w, color: Color(0xff232425))),
-                        )
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.symmetric(vertical: 15),
+                        width: 1.sw,
+                        height: 35.h,
+                        color: Color(0xff87e3f2),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 12.0.w),
+                              child: Text("Last Uploaded",
+                                  style: GoogleFonts.prompt(
+                                      fontSize: 20.w, color: Color(0xff232425))),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   Column(
                     children: [
                       Container(
                         width: 1.sw,
                         height: 150.h,
-                        color: Color(0xff87e3f2),
+                        color: Color(0xff284448),
                         child: Row(
                           children: [
                             Padding(
@@ -274,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Text("Start Uploading your X-Rays!",
                                   style: GoogleFonts.prompt(
                                       fontSize: 20.w,
-                                      color: Color(0xff232425))),
+                                      color: Color(0xfffafafa))),
                             )
                           ],
                         ),
@@ -300,27 +258,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-  }
-}
-
-class UpwardTrianglePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = Color(0xff232425)
-      ..style = PaintingStyle.fill;
-
-    final path = Path()
-      ..moveTo(size.width / 2, size.height)
-      ..lineTo(size.width, 0)
-      ..lineTo(0, 0)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }

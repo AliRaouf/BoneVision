@@ -5,7 +5,7 @@ class CurvedTrianglePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint()
-      ..color = Color(0xff87e3f2)
+      ..color = Color(0xff284448)
       ..style = PaintingStyle.fill;
 
     Path path = Path();
