@@ -33,8 +33,8 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
     var cubit = HelpcenterCubit.get(context);
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Color(0xff21be44),
-      title: Text("Doctor",style: GoogleFonts.prompt(color:Color(0xffFAFAFA)),),
+      backgroundColor: Color(0xff5ee1e6),
+      title: Text("Doctor",style: GoogleFonts.prompt(color:Color(0xff232425)),),
       centerTitle: true,
       leading: IconButton(
         onPressed: () {
@@ -42,7 +42,7 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
         },
         icon: Icon(
           Icons.arrow_back_ios,
-          color: Colors.white,
+          color: Color(0xff232425),
         ),
       ),
     ),
@@ -83,16 +83,16 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                           messageController.clear();
                         }
                       },
-                      icon: Icon(Icons.send, color: Color(0xff21be44)),
+                      icon: Icon(Icons.send, color: Color(0xff284448)),
                     ),
                     hintText: 'Send a Message',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xff21be44), width: 2),
+                      borderSide: BorderSide(color: Color(0xff284448), width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xff21be44), width: 2),
+                      borderSide: BorderSide(color: Color(0xff284448), width: 2),
                     ),
                   ),
                 ),

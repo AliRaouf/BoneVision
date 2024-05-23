@@ -188,14 +188,8 @@ class _HomeScreenState extends State<HomeScreen> {
         index: _activeIndex,
         children: [
           Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: Text("Hey! Welcome ${cubit.userName ?? ""}",
-                  style: GoogleFonts.prompt(
-                      fontSize: 20.w, color: Color(0xff232425))),
-            ),
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w,vertical: 20.h),
+              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -204,27 +198,65 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         margin: EdgeInsets.symmetric(vertical: 15),
                         width: 1.sw,
-                        height: 35.h,
-                        color: Color(0xff87e3f2),
-                        child: Row(
+                        height: 200.h,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsets.only(left: 12.0.w),
                               child: Text("Last Uploaded",
                                   style: GoogleFonts.prompt(
-                                      fontSize: 20.w, color: Color(0xff232425))),
+                                      fontSize: 20.w,
+                                      color: Color(0xffa9a9a9))),
+                            ),
+                            Text(
+                              "You haven't added any tests yet",
+                              style: GoogleFonts.prompt(),
                             )
                           ],
                         ),
                       ),
                     ],
                   ),
+                  Container(
+                    width: 1.sw,
+                    height: 150.h,
+                    color: Color(0xff12696f),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 12.0.w, top: 12.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Text(
+                                "Have you talked to one of our doctors yet?",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.prompt(
+                                    fontSize: 14.w, color: Color(0xfffafafa))),
+                          ),
+                          Expanded(
+                              child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SupportChatScreen(),));
+                                  },
+                                  child: Text(
+                                    "Click Here to start Start Now!",
+                                    style: GoogleFonts.prompt(
+                                        color: Color(0xffacfbff)),
+                                  )))
+                        ],
+                      ),
+                    ),
+                  ),
                   Column(
                     children: [
                       Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(style: BorderStyle.none),
+                          color: Color(0xff284448),
+                        ),
                         width: 1.sw,
                         height: 150.h,
-                        color: Color(0xff284448),
                         child: Row(
                           children: [
                             Padding(

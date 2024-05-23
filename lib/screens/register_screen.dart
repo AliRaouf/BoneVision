@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Text(
                           "Gender",
                           style: GoogleFonts.prompt(
-                              fontSize: 18, color: const Color(0xff38a7ab)),
+                              fontSize: 18, color: const Color(0xff8a8a8a)),
                         ),
                       ),
                       controller: genderController,
@@ -235,7 +235,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Container(
                     margin: EdgeInsets.only(top: 35.h),
                     child: CustomButton(
-                        screenWidth: 0.8.sw,
+                        screenWidth: 0.4.sw,
                         screenHeight: 45.h,
                         text: "Register",
                         onpressed: ()async{
@@ -273,7 +273,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                         bColor: Color(0xff97dfe3),
                         tColor: Color(0xff232425),
-                        fontSize: 32.w,
+                        fontSize: 18.w,
                         radius: 20),
                   ),
                 ],

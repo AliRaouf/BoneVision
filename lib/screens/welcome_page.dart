@@ -55,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               CustomButton(
                   radius: 20,
-                  screenWidth: 0.8.sw,
+                  screenWidth: 0.55.sw,
                   screenHeight: 0.075.sh,
                   text: "Create Account",
                   onpressed: () {
@@ -66,13 +66,13 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   bColor: Color(0xff97dfe3),
                   tColor: Color(0xff232425),
-                  fontSize: 28.w),
+                  fontSize: 16.w),
               SizedBox(
                 height: 0.05.sh,
               ),
               CustomButton(
                   radius: 20,
-                  screenWidth: 0.8.sw,
+                  screenWidth: 0.55.sw,
                   screenHeight: 0.075.sh,
                   text: "Login",
                   onpressed: () {
@@ -83,7 +83,7 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   bColor: Color(0xff284448),
                   tColor: Color(0xffFAFAFA),
-                  fontSize: 32.w),
+                  fontSize: 18.w),
             ],
           ),
         ),

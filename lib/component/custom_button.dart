@@ -42,9 +42,9 @@ class CustomButton extends StatelessWidget {
             shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(radius)))),
         onPressed: onpressed,
-        child: Text(
+        child: Text(textAlign: TextAlign.center,
           text,
-          style: GoogleFonts.prompt(color: tColor, fontSize: fontSize,fontWeight: FontWeight.bold),
+          style: GoogleFonts.prompt(color: tColor, fontSize: fontSize,fontWeight: FontWeight.bold,),
         ),
       ),
     );

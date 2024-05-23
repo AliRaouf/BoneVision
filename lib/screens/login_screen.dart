@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       builder: (context, state) {
-        if(state is LoginLoadingState){
+        if (state is LoginLoadingState) {
           return Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
@@ -124,9 +124,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 35.h),
+                    margin: EdgeInsets.only(top: 20.h),
                     child: CustomButton(
-                        screenWidth: 0.8.sw,
+                        screenWidth: 0.4.sw,
                         screenHeight: 45.h,
                         text: "Login",
                         onpressed: () {
@@ -135,84 +135,94 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         bColor: Color(0xff97dfe3),
                         tColor: Color(0xff232425),
-                        fontSize: 28.w,
+                        fontSize: 18.w,
                         radius: 20),
                   ),
                 ],
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPasswordScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgotPasswordScreen()));
                 },
                 child: Text(
                   "Forgot your password?",
                   style: GoogleFonts.prompt(
-                      color: Color(0xff87e3f2), fontSize: 19.w),
+                      color: Color(0xff284448), fontSize: 14.w),
                 ),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    child: GFIconButton(size: 40,
-                      onPressed: ()async{
-                        try {
-                          final user = await cubit.signInWithFacebook();
-                          print(user!.email);
-                          await cubit.doesEmailExist(user.email!);
-                          if (cubit.isExist == true) {
-                            await UserCubit.get(context).getUserData();
-                            await UserCubit.get(context).receiverUserData();
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()));
-                          } else if (cubit.isExist == false) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        RegisterScreen(
-                                          user: user,
-                                        )));
-                          }
-                        } on FirebaseAuthException catch (error) {
-                          print(error.message);
-                        } catch (e) {
-                          print(e);
-                        }
-                      },
-                      icon: Icon(Icons.facebook),shape: GFIconButtonShape.circle),),
-                    Container(
-                      child: GFIconButton(size: 40,
-                          onPressed: ()async{
-
-                            try {
-                              final user = await cubit.googleSignin();
-                              print(user!.email);
-                              await cubit.doesEmailExist(user.email!);
-                              if (cubit.isExist == true) {
-                                await UserCubit.get(context).getUserData();
-                                await UserCubit.get(context).receiverUserData();
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomeScreen()));
-                              } else if (cubit.isExist == false) {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            RegisterScreen(
-                                              user: user,
-                                            )));
-                              }
-                            } on FirebaseAuthException catch (error) {
-                              print(error.message);
-                            } catch (e) {
-                              print(e);
+                    child: GFIconButton(
+                        size: 40,
+                        onPressed: () async {
+                          try {
+                            final user = await cubit.signInWithFacebook();
+                            print(user!.email);
+                            await cubit.doesEmailExist(user.email!);
+                            if (cubit.isExist == true) {
+                              await UserCubit.get(context).getUserData();
+                              await UserCubit.get(context).receiverUserData();
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            } else if (cubit.isExist == false) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterScreen(
+                                            user: user,
+                                          )));
                             }
-                          },type: GFButtonType.outline,
-                          icon: SvgPicture.network("https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"),shape: GFIconButtonShape.circle),
+                          } on FirebaseAuthException catch (error) {
+                            print(error.message);
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        icon: Icon(Icons.facebook),
+                        shape: GFIconButtonShape.circle),
+                  ),
+                  Container(
+                    child: GFIconButton(
+                        size: 40,
+                        borderShape:
+                            CircleBorder(side: BorderSide(color: Colors.black)),
+                        onPressed: () async {
+                          try {
+                            final user = await cubit.googleSignin();
+                            print(user!.email);
+                            await cubit.doesEmailExist(user.email!);
+                            if (cubit.isExist == true) {
+                              await UserCubit.get(context).getUserData();
+                              await UserCubit.get(context).receiverUserData();
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomeScreen()));
+                            } else if (cubit.isExist == false) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => RegisterScreen(
+                                            user: user,
+                                          )));
+                            }
+                          } on FirebaseAuthException catch (error) {
+                            print(error.message);
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
+                        type: GFButtonType.outline,
+                        icon: SvgPicture.network(
+                            "https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"),
+                        shape: GFIconButtonShape.circle),
                   ),
                 ],
               ),

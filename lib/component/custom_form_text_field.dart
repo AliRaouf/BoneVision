@@ -40,7 +40,7 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hint,
           labelText: label,
           labelStyle:
-          GoogleFonts.prompt(fontSize: 18.sp, color: Color(0xff38a7ab)),
+          GoogleFonts.prompt(fontSize: 18.sp, color: Color(0xff8a8a8a)),
           floatingLabelBehavior: FloatingLabelBehavior.always,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),

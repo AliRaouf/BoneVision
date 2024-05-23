@@ -28,7 +28,7 @@ class ChatList extends StatelessWidget {
                   BoxDecoration(borderRadius:
                   BorderRadius.only(topLeft:Radius.circular(30),bottomLeft: Radius.circular(30)
                       ,topRight: Radius.circular(30)
-                  ),color: Color(0xff00a228)
+                  ),color: Color(0xff12696f)
                   ):BoxDecoration(borderRadius:
                   BorderRadius.only(topLeft:Radius.circular(30),bottomRight: Radius.circular(30)
                       ,topRight: Radius.circular(30)

@@ -11,7 +11,7 @@ class StartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return Scaffold(backgroundColor: Colors.white,
       body: Column(
         children: [
           Container(
@@ -30,12 +30,12 @@ class StartScreen extends StatelessWidget {
                       style: GoogleFonts.prompt(
                           color: Color(0xff232425),
                           fontWeight: FontWeight.bold,
-                          fontSize: 32.w)),
+                          fontSize: 24.w)),
                   Text("Get your report immediately",
                       style: GoogleFonts.prompt(
                           color: Color(0xff232425),
                           fontWeight: FontWeight.w500,
-                          fontSize: 18.w))
+                          fontSize: 14.w))
                 ],
               ),
             ),
@@ -52,7 +52,7 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           CustomButton(radius: 10,
-              screenWidth: 0.8.sw,
+              screenWidth: 0.4.sw,
               screenHeight: 50.h,
               text: "Let's Start",
               onpressed: () {
@@ -61,7 +61,7 @@ class StartScreen extends StatelessWidget {
               },
               bColor: Color(0xff97dfe3),
               tColor: Color(0xff232425),
-              fontSize: 32.w),
+              fontSize: 18.w),
           SizedBox(height: screenHeight * 0.03),
           RichText(
             text: TextSpan(

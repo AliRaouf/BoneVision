@@ -49,7 +49,7 @@ class SupportScreen extends StatelessWidget {
           style: GoogleFonts.prompt(
               fontSize: 32.sp,
               fontWeight: FontWeight.bold,
-              color: const Color(0xff21BE44)),
+              color: const Color(0xff5ee1e6)),
         ),
         const Padding(
           padding: EdgeInsets.all(8.0),
@@ -79,8 +79,8 @@ class SupportScreen extends StatelessWidget {
           margin: EdgeInsets.only(top: 50.h),
           child: Center(
             child: CustomButton(
-                screenWidth: 280.w,
-                screenHeight: 80.h,
+                screenWidth: 0.4.sw,
+                screenHeight: 60.h,
                 text: "Chat Now",
                 onpressed: () {
                   Navigator.push(
@@ -88,9 +88,9 @@ class SupportScreen extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => SupportChatScreen()));
                 },
-                bColor: const Color(0xff21BE44),
+                bColor: const Color(0xff284448),
                 tColor: const Color(0xfffafafa),
-                fontSize: 32.sp,
+                fontSize: 18.sp,
                 radius: 20),
           ),
         )
