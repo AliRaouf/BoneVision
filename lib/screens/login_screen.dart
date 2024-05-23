@@ -163,15 +163,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           try {
                             final user = await cubit.signInWithFacebook();
                             print(user!.email);
-                            await cubit.doesEmailExist(user.email!);
-                            if (cubit.isExist == true) {
+                            if (await cubit.doesEmailExist(user.email!)) {
                               await UserCubit.get(context).getUserData();
                               await UserCubit.get(context).receiverUserData();
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => HomeScreen()));
-                            } else if (cubit.isExist == false) {
+                            } else if (await cubit.doesEmailExist(user.email!) == false) {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -197,15 +196,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           try {
                             final user = await cubit.googleSignin();
                             print(user!.email);
-                            await cubit.doesEmailExist(user.email!);
-                            if (cubit.isExist == true) {
+                            if (await cubit.doesEmailExist(user.email!)) {
                               await UserCubit.get(context).getUserData();
                               await UserCubit.get(context).receiverUserData();
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => HomeScreen()));
-                            } else if (cubit.isExist == false) {
+                            } else if (await cubit.doesEmailExist(user.email!) == false) {
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
