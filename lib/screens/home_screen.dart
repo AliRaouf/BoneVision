@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Scaffold(
             appBar: AppBar(
               actions: [
-                IconButton.outlined(style: ButtonStyle(side: WidgetStatePropertyAll(BorderSide(color:Color(0xff7bc3cd)))),
+                IconButton.outlined(style: ButtonStyle(side: MaterialStatePropertyAll(BorderSide(color:Color(0xff7bc3cd)))),
                     onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackScreen(),));
                     },
