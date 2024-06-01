@@ -21,7 +21,7 @@ class AppRoot extends StatelessWidget {
       BlocProvider(create: (context)=>DoctorCubit()..receiveMessage())
     ],
       child:
-        MaterialApp(debugShowCheckedModeBanner: false,
+        MaterialApp(debugShowCheckedModeBanner: false,theme: ThemeData(scaffoldBackgroundColor: Colors.white,),
             home: StartScreen()),
     );
   }

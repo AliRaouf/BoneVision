@@ -19,7 +19,7 @@ class _UploadTestScreenState extends State<UploadTestScreen> {
     return BlocBuilder<XrayCubit, XrayState>(
       builder: (context, state) {
         return Scaffold(
-          bottomNavigationBar: BottomAppBar(
+          bottomNavigationBar: BottomAppBar(color: Colors.white,
             elevation: 0,
             child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -2,6 +2,8 @@ import 'package:bonevision/bloc/doctor/doctor_cubit.dart';
 import 'package:bonevision/bloc/user/user_cubit.dart';
 import 'package:bonevision/bloc/xray/xray_cubit.dart';
 import 'package:bonevision/component/clipcontainer.dart';
+import 'package:bonevision/component/gradient_text.dart';
+import 'package:bonevision/screens/feedback_screen.dart';
 import 'package:bonevision/screens/images_screen.dart';
 import 'package:bonevision/screens/settings_screen.dart';
 import 'package:bonevision/screens/support_chat_screen.dart';
@@ -24,6 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _activeIndex = 0;
+  List tests = [1, 2, 3];
 
   @override
   Widget build(BuildContext context) {
@@ -188,8 +191,26 @@ class _HomeScreenState extends State<HomeScreen> {
         index: _activeIndex,
         children: [
           Scaffold(
+            appBar: AppBar(
+              actions: [
+                IconButton.outlined(style: ButtonStyle(side: WidgetStatePropertyAll(BorderSide(color:Color(0xff7bc3cd)))),
+                    onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => FeedbackScreen(),));
+                    },
+                    icon: Icon(
+                      Icons.feedback_outlined,
+                      color: Color(0xff12696f),
+                    ))
+              ],
+              backgroundColor: Colors.white,
+              automaticallyImplyLeading: false,
+              title: GradientText("BoneVision",
+                  style: GoogleFonts.skranji(fontSize: 18.sp),
+                  gradient: LinearGradient(
+                      colors: [Color(0xff7bc3cd), Color(0xff3e6267)])),
+            ),
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 20.h),
+              padding: EdgeInsets.only(left: 8.w, right: 8.w, bottom: 20.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -202,16 +223,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 12.0.w),
-                              child: Text("Last Uploaded",
-                                  style: GoogleFonts.prompt(
-                                      fontSize: 20.w,
-                                      color: Color(0xffa9a9a9))),
+                            Container(
+                              width: 1.sw,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff7bc3cd),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 12.0.w),
+                                child: Text("Last Uploaded",
+                                    style: GoogleFonts.prompt(
+                                        fontSize: 20.w, color: Colors.white)),
+                              ),
                             ),
-                            Text(
-                              "You haven't added any tests yet",
-                              style: GoogleFonts.prompt(),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: tests.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.grey[400],
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      width: 125.h,
+                                      height: 40.h,
+                                    ),
+                                  );
+                                },
+                              ),
                             )
                           ],
                         ),
@@ -219,9 +260,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   Container(
+                    margin: EdgeInsets.only(top: 50.h),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color(0xff12696f)),
                     width: 1.sw,
-                    height: 150.h,
-                    color: Color(0xff12696f),
+                    height: 100.h,
                     child: Padding(
                       padding: EdgeInsets.only(left: 12.0.w, top: 12.h),
                       child: Column(
@@ -232,15 +276,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "Have you talked to one of our doctors yet?",
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.prompt(
-                                    fontSize: 14.w, color: Color(0xfffafafa))),
+                                    fontSize: 12.w, color: Color(0xfffafafa))),
                           ),
                           Expanded(
                               child: TextButton(
                                   onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => SupportChatScreen(),));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              SupportChatScreen(),
+                                        ));
                                   },
                                   child: Text(
-                                    "Click Here to start Start Now!",
+                                    "Click Here to Start Now!",
                                     style: GoogleFonts.prompt(
                                         color: Color(0xffacfbff)),
                                   )))
@@ -252,21 +301,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Container(
                         decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
                           border: Border.all(style: BorderStyle.none),
                           color: Color(0xff284448),
                         ),
                         width: 1.sw,
-                        height: 150.h,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 12.0.w),
-                              child: Text("Start Uploading your X-Rays!",
-                                  style: GoogleFonts.prompt(
-                                      fontSize: 20.w,
-                                      color: Color(0xfffafafa))),
-                            )
-                          ],
+                        height: 40.h,
+                        child: Center(
+                          child: Text("Start Uploading your X-Rays!",
+                              style: GoogleFonts.prompt(
+                                  fontSize: 14.w, color: Color(0xfffafafa))),
                         ),
                       ),
                       CustomPaint(

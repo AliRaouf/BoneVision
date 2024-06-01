@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = UserCubit.get(context);
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         title: Text(
           "Settings",
