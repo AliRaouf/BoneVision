@@ -122,11 +122,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            lastMessage["text"],
-                                            style: GoogleFonts.prompt(
-                                                fontSize: 16.w,
-                                                color: Color(0xff8c8c8c)),
+                                          Container(width: 0.6.sw,
+                                            child: Text(
+                                              lastMessage["text"],overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.prompt(
+                                                  fontSize: 16.w,
+                                                  color: Color(0xff8c8c8c)),
+                                            ),
                                           ),
                                           Text(
                                             "${DateFormat.jm().format(time)}",
