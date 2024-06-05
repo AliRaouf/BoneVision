@@ -9,14 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
-import 'package:screenshot/screenshot.dart';
 class UploadTestScreen extends StatefulWidget {
   const UploadTestScreen({super.key});
 
   @override
   State<UploadTestScreen> createState() => _UploadTestScreenState();
 }
-ScreenshotController screenshotController = ScreenshotController();
 class _UploadTestScreenState extends State<UploadTestScreen> {
   @override
   Widget build(BuildContext context) {

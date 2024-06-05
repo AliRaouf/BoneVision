@@ -54,7 +54,6 @@ dependencies:
   iconify_flutter: ^0.0.5
   http: ^1.2.1
   flutter_image_compress: ^2.3.0
-  screenshot: ^3.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
