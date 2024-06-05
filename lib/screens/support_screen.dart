@@ -42,10 +42,10 @@ class SupportScreen extends StatelessWidget {
             width: 1.sw,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/images/img_1.png"),
+                    image: AssetImage("assets/images/img_3.png"),
                     fit: BoxFit.cover))),
         Text(
-          "Help Center",
+          "Consult Doctor",
           style: GoogleFonts.prompt(
               fontSize: 32.sp,
               fontWeight: FontWeight.bold,

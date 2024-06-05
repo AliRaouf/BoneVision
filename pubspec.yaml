@@ -46,11 +46,15 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_screenutil: ^5.9.0
   getwidget: ^4.0.0
-  flutter_svg: ^2.0.10+1
   google_sign_in: ^6.2.1
   flutter_facebook_auth: ^6.2.0
   firebase_storage: ^11.7.5
   intl_phone_field: ^3.2.0
+  iconify: ^0.0.1
+  iconify_flutter: ^0.0.5
+  http: ^1.2.1
+  flutter_image_compress: ^2.3.0
+  screenshot: ^3.0.0
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -86,6 +90,8 @@ flutter:
      - assets/images/2.png
      - assets/images/3.png
      - assets/images/img_1.png
+     - assets/images/img_3.png
+     - assets/images/img_2.png
      - assets/images/logo.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
