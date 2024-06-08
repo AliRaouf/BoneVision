@@ -9,31 +9,45 @@ part 'helpcenter_state.dart';
 
 class HelpcenterCubit extends Cubit<HelpcenterState> {
   HelpcenterCubit() : super(HelpcenterInitial());
-  static HelpcenterCubit get(context)=>BlocProvider.of(context);
+
+  static HelpcenterCubit get(context) => BlocProvider.of(context);
   String? userEmail;
-  Stream ?messagesStream;
+  Stream? messagesStream;
   User? user;
-  sendMessage(String text,DateTime time, String groupName){
-    userEmail=FirebaseAuth.instance.currentUser!.email;
+
+  sendMessage(String text, DateTime time, String groupName) {
+    userEmail = FirebaseAuth.instance.currentUser!.email;
     emit(MessageSendLoadingState());
-    Message message= Message(text: text, time: DateTime.now(), sender: userEmail!, groupName:groupName);
-    FirebaseFirestore.instance.collection("messages").add(message.toMap()).
-    then((value){
+    Message message = Message(
+        text: text,
+        time: DateTime.now(),
+        sender: userEmail!,
+        groupName: groupName);
+    FirebaseFirestore.instance
+        .collection("messages")
+        .doc(userEmail)
+        .collection("userMessages")
+        .add(message.toMap())
+        .then((value) {
       emit(MessageSendSuccessState());
-    }).
-    catchError((error) {
-      emit(MessageSendErrorState()
-      );
+    }).catchError((error) {
+      emit(MessageSendErrorState());
       print(error);
     });
   }
-  receiveMessage(String groupName){
-    messagesStream=FirebaseFirestore.instance.collection("messages").where("groupName",isEqualTo:groupName).orderBy("time").snapshots();
+
+  receiveMessage(String groupName) {
+    messagesStream = FirebaseFirestore.instance
+        .collection("messages")
+        .doc(FirebaseAuth.instance.currentUser!.email)
+        .collection("userMessages")
+        .orderBy("time")
+        .snapshots();
     emit(MessageReceiveMessageState());
   }
-  getUserData()
-  {
-    user=FirebaseAuth.instance.currentUser;
+
+  getUserData() {
+    user = FirebaseAuth.instance.currentUser;
     emit(MessageGetUserDataState());
   }
 }
