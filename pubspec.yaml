@@ -54,6 +54,7 @@ dependencies:
   iconify_flutter: ^0.0.5
   http: ^1.2.1
   flutter_image_compress: ^2.3.0
+  chat_gpt_sdk: ^3.0.9
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

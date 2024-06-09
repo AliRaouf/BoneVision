@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SupportChatScreen extends StatefulWidget {
-  SupportChatScreen({super.key,this.userEmail});
+  SupportChatScreen({super.key, this.userEmail});
+
   String? userEmail;
+
   @override
   State<SupportChatScreen> createState() => _SupportChatScreenState();
 }
@@ -15,36 +17,44 @@ class SupportChatScreen extends StatefulWidget {
 class _SupportChatScreenState extends State<SupportChatScreen> {
   @override
   void initState() {
-    if(UserCubit.get(context).type=='doctor'){
+    if (UserCubit
+        .get(context)
+        .type == 'doctor') {
       HelpcenterCubit.get(context)
           .receiveMessage(widget.userEmail!);
     }
-    else{
+    else {
       HelpcenterCubit.get(context).getUserData();
       HelpcenterCubit.get(context)
-          .receiveMessage(UserCubit.get(context).user!.email!);
+          .receiveMessage(UserCubit
+          .get(context)
+          .user!
+          .email!);
     }
     super.initState();
   }
+
   var messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var cubit = HelpcenterCubit.get(context);
     return Scaffold(
       appBar: AppBar(
-      backgroundColor: Color(0xff5ee1e6),
-      title: Text("Doctor",style: GoogleFonts.prompt(color:Color(0xff232425)),),
-      centerTitle: true,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        icon: Icon(
-          Icons.arrow_back_ios,
-          color: Color(0xff232425),
+        backgroundColor: Color(0xff5ee1e6),
+        title: Text(
+          "Doctor", style: GoogleFonts.prompt(color: Color(0xff232425)),),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xff232425),
+          ),
         ),
       ),
-    ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -71,15 +81,38 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                   style: TextStyle(color: Colors.black),
                   decoration: InputDecoration(
                     suffixIcon: IconButton(
-                      onPressed: () {
+                      onPressed: () async {
                         if (messageController.text.isNotEmpty) {
-                          DateTime time = DateTime.now();
-                          cubit.sendMessage(
-                            messageController.text,
-                            time,
-                         UserCubit.get(context).type=='doctor'?widget.userEmail!:cubit.user!.email!,
-                          );
-                          messageController.clear();
+                          if (await cubit.getLastMessageTimestamp(
+                              cubit.user!.email!)) {
+                            DateTime time = DateTime.now();
+                            cubit.sendMessage(
+                              messageController.text,
+                              time,cubit.user!.email!,
+                              UserCubit
+                                  .get(context)
+                                  .type == 'doctor' ? widget.userEmail! : cubit
+                                  .user!.email!,
+                            );
+                            messageController.clear();
+                            cubit.sendMessage(
+                                'Thank you for reaching out! we have received your message and will respond to you as soon as possible.',
+                                DateTime.now(),"Generated",cubit.user!.email!);
+                            print("Generation");
+                          }
+                          else{
+                            DateTime time = DateTime.now();
+                            cubit.sendMessage(
+                              messageController.text,
+                              time,cubit.user!.email!,
+                              UserCubit
+                                  .get(context)
+                                  .type == 'doctor' ? widget.userEmail! : cubit
+                                  .user!.email!,
+                            );
+                            messageController.clear();
+                            print("No generation");
+                          }
                         }
                       },
                       icon: Icon(Icons.send, color: Color(0xff284448)),
@@ -87,11 +120,13 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
                     hintText: 'Send a Message',
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xff284448), width: 2),
+                      borderSide: BorderSide(
+                          color: Color(0xff284448), width: 2),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
-                      borderSide: BorderSide(color: Color(0xff284448), width: 2),
+                      borderSide: BorderSide(
+                          color: Color(0xff284448), width: 2),
                     ),
                   ),
                 ),
@@ -101,4 +136,5 @@ class _SupportChatScreenState extends State<SupportChatScreen> {
         ],
       ),
     );
-}}
+  }
+}

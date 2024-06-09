@@ -18,6 +18,10 @@ class DoctorCubit extends Cubit<DoctorState> {
         .where((message) => message["sender"] == messages[index]["sender"])
         .toList();
     filteredMessages.sort((a, b) => b["time"].compareTo((a["time"])));
-    return filteredMessages.first;
+    if(filteredMessages.first["sender"]!="Generated" || filteredMessages.first["sender"]!="amr2082002@gmail.com") {
+      return filteredMessages.first;
+    }else{
+      return filteredMessages[1];
+    }
   }
 }

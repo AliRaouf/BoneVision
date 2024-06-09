@@ -1,5 +1,6 @@
              import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../bloc/xray/xray_cubit.dart';
 
 class ResponseImage extends StatefulWidget {
@@ -24,8 +25,10 @@ class _ResponseImageState extends State<ResponseImage> {
         return Scaffold(
           body: SafeArea(
               child: Column(
+
                 children: [
-                  Image(image: MemoryImage(cubit.resizedImage!)),
+                  SizedBox(width: 1.sw,height:200.h,
+                      child: Image(image: MemoryImage(cubit.resizedImage!))),
                 ],
               )
           ),

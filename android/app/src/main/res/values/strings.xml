@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="facebook_app_id">1117986179406273</string>
-    <string name="fb_login_protocol_scheme">fb1117986179406273</string>
-    <string name="facebook_client_token">3ed8cca0c8d309cbf84543f25d6c4094</string>
+    <string name="facebook_app_id">484676477293781</string>
+    <string name="fb_login_protocol_scheme">fb484676477293781</string>
+    <string name="facebook_client_token">6b1388ad691b3a395a468dafe6b5a5d5</string>
     <string name="app_name">BoneVision</string>
 </resources>

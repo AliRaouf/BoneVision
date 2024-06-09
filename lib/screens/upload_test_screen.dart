@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart';
+
+import '../bloc/model/model_cubit.dart';
 class UploadTestScreen extends StatefulWidget {
   const UploadTestScreen({super.key});
 
@@ -51,7 +53,7 @@ class _UploadTestScreenState extends State<UploadTestScreen> {
                       cubit.resizedImage = cubit.image!;
                       String base64Image = base64Encode(cubit.resizedImage!);
                       final apiKey = 'PJ8OjvRxM1f1W929Ksq7';
-                      final url = 'https://detect.roboflow.com/bone-od/7?api_key=$apiKey';
+                      final url = 'https://detect.roboflow.com/bone-od/6?api_key=$apiKey';
 
                       final headers = {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,10 +61,11 @@ class _UploadTestScreenState extends State<UploadTestScreen> {
 
                       final response = await post(Uri.parse(url),
                           headers: headers,
-                          body: "");
+                          body: base64Image);
 
                       if (response.statusCode == 200) {
                         log(response.body);
+                        await ModelCubit.get(context).getJSONFromPrompt();
                         Navigator.push(context, MaterialPageRoute(builder: (context) => ResponseImage()));
                       } else {
                         print('Error: ${response.statusCode}');
